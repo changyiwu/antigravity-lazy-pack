@@ -12,7 +12,7 @@ def get_api_key():
     # 優先從環境變數讀取，若無則使用寫入的預設金鑰
     return os.environ.get("OPENAI_API_KEY", DEFAULT_API_KEY)
 
-def draw_image(prompt, output_path, size="1024x1024", model="gpt-image-2", quality="medium"):
+def draw_image(prompt, output_path, size="1024x1024", model="gpt-image-2", quality="low"):
     api_key = get_api_key()
     if not api_key:
         print("Error: OpenAI API Key is missing.", file=sys.stderr)
@@ -92,7 +92,7 @@ if __name__ == "__main__":
     parser.add_argument("--output", default="output.png", help="The output file path for the image")
     parser.add_argument("--size", default="1024x1024", help="Image size (default: 1024x1024)")
     parser.add_argument("--model", default="gpt-image-2", help="OpenAI image model (default: gpt-image-2, or dall-e-3)")
-    parser.add_argument("--quality", default="medium", choices=["low", "medium", "high"], help="Image quality (default: medium, choices: low, medium, high)")
+    parser.add_argument("--quality", default="low", choices=["low", "medium", "high"], help="Image quality (default: low, choices: low, medium, high)")
     args = parser.parse_args()
     
     draw_image(args.prompt, args.output, args.size, args.model, args.quality)
