@@ -1,4 +1,4 @@
-﻿# Anti-Gravity 懶人包 #09：服務連接與工作流程設定
+# Anti-Gravity 懶人包 #09：服務連接與工作流程設定
 
 > 版本：v1.4
 > 更新日期：2026-05-31
@@ -297,7 +297,7 @@ Anti-Gravity 可使用專案根目錄的 `ANTIGRAVITY.md` 作為 AI 工作規則
 - 是否建立 GitHub repo
 - repo 公開或私有
 - 是否需要 GitHub Pages / Firebase / 其他部署
-- Obsidian vault 與專案駕駛艙位置
+- Obsidian vault 位置（明確指出專案筆記是寫到 Obsidian 根目錄底下的專案駕駛艙，檔名格式為 `<專案名稱>-專案駕駛艙.md`）
 
 接著建立或補齊：
 
@@ -306,7 +306,7 @@ Anti-Gravity 可使用專案根目錄的 `ANTIGRAVITY.md` 作為 AI 工作規則
 - `.gitignore`
 - Git repo
 - GitHub repo（使用者需要時）
-- Obsidian 專案駕駛艙
+- Obsidian 專案駕駛艙（位於 Obsidian 根目錄下，檔名為 `<專案名稱>-專案駕駛艙.md`）
 
 如果資料夾已經是既有專案，先盤點「已存在 / 缺少」清單，只補缺口，不覆蓋既有設定。
 
