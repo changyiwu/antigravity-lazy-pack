@@ -260,7 +260,7 @@ foreach ($Candidate in @(
     [pscustomobject]@{ Name = 'python'; Prefix = @() },
     [pscustomobject]@{ Name = 'py'; Prefix = @('-3') }
 )) {
-    $Command = Get-Command $Candidate.Name -CommandType Application -ErrorAction SilentlyContinue
+    $Command = Get-Command $Candidate.Name -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
     if (-not $Command) {
         continue
     }
