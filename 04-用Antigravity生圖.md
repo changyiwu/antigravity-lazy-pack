@@ -6,9 +6,11 @@
 
 ## 這份懶人包會做什麼
 
-提供兩條生圖路線：預設使用 AntiGravity 目前可用的內建生圖工具；只有使用者明確指定 OpenAI API 時，才執行專案附帶的 Python 腳本。
+提供兩條生圖路線：若目前 Antigravity IDE 版本確實提供可用的內建生圖工具，優先使用該工具；只有使用者明確指定 OpenAI API 時，才執行專案附帶的 Python 腳本。
 
 ## 路線 A：AntiGravity 內建生圖
+
+只有目前介面能實際找到並呼叫內建生圖工具時才使用。若找不到，不要假裝已具備該能力，應回報現況並詢問是否改走 OpenAI Image API。
 
 適合一般「幫我生圖／畫圖」請求：
 
@@ -38,10 +40,11 @@ python .\skills\04-draw\scripts\draw_openai.py `
   --prompt "English image prompt" `
   --output ".\assets\output.png" `
   --model gpt-image-2 `
+  --output-format png `
   --quality low
 ```
 
-可用 quality：`low`、`medium`、`high`。目前腳本以 `gpt-image-2` 為預設，不再把已淘汰的 DALL-E 模型列為建議選項。
+可用 quality：`low`、`medium`、`high`。可用輸出格式：`png`、`jpeg`、`webp`，檔名副檔名必須一致。目前腳本以 `gpt-image-2` 為預設，不再把已淘汰的 DALL-E 模型列為建議選項。
 
 ## 建議提示格式
 
@@ -67,6 +70,7 @@ python .\skills\04-draw\scripts\draw_openai.py `
 ## 安全與清理
 
 - 不印出或回報 API Key。
+- 不在終端輸出完整 prompt 或原始 API 錯誤本文。
 - 不把臨時圖片全部提交到懶人包 repo。
 - 暫存圖片若要刪除，先詢問使用者。
-- API 失敗時回報狀態碼與可安全公開的錯誤，不傾印可能含敏感內容的完整回應。
+- API 失敗時只回報狀態碼、原因與 request ID（若有），不傾印可能含敏感內容的完整回應。

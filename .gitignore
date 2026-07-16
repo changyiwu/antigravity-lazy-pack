@@ -8,6 +8,8 @@ Desktop.ini
 # Environment variables and secrets
 .env
 .env.*
+!.env.example
+!.env.sample
 *.key
 credentials.*
 secrets.*
@@ -27,8 +29,6 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-lock.yaml
-package-lock.json
 
 # NotebookLM and private exports
 notebooks.json
@@ -41,14 +41,15 @@ downloads/
 generated/
 generated_images/
 images/generated/
-*.png
-*.jpg
-*.jpeg
-*.webp
-*.gif
-*.pptx
-*.docx
-*.pdf
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
 # Local test apps
 wordcloud-app/

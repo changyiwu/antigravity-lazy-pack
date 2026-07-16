@@ -18,6 +18,8 @@
 
 ## 步驟一：安裝或更新
 
+安裝或更新會修改使用者層級的 `uv` tool，執行前先取得同意。
+
 ```powershell
 uv --version
 uv tool install notebooklm-mcp-cli
@@ -37,6 +39,8 @@ Get-Command nlm, notebooklm-mcp
 ```
 
 ## 步驟二：登入
+
+登入會開啟瀏覽器並在本機保存認證資料，執行前先取得同意。
 
 ```powershell
 nlm login
@@ -60,6 +64,14 @@ nlm doctor
 ```text
 ~/.gemini/config/mcp_config.json
 ```
+
+修改設定時必須使用合併流程：
+
+1. 若檔案已存在，先用 `Get-Content -Raw` 讀取，並以 `ConvertFrom-Json` 確認目前 JSON 合法。
+2. 寫入前建立帶時間戳的備份，例如 `mcp_config.json.bak-20260717-120000`。
+3. 只新增或更新 `.mcpServers.notebooklm`，保留其他 server；下方範例不可拿來覆蓋整份既有設定。
+4. 若同名 server 已存在，先顯示差異並取得更新同意。
+5. 寫入後再次使用 `Get-Content -Raw | ConvertFrom-Json` 驗證。
 
 ```json
 {

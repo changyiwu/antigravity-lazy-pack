@@ -13,7 +13,7 @@ npm.cmd install -g @bitbonsai/mcpvault
 Get-Command mcpvault
 ```
 
-3. 在 `~/.gemini/config/mcp_config.json` 加入：
+3. 先解析並備份 `~/.gemini/config/mcp_config.json`，只合併 `.mcpServers.obsidian`，保留其他 server；同名設定先顯示差異並確認，寫入後再解析驗證：
 
 ```json
 {

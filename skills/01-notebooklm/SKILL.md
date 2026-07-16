@@ -8,10 +8,10 @@ description: 在 AntiGravity 連接第三方 NotebookLM MCP。使用者說「連
 > `notebooklm-mcp-cli` 是非 Google 官方工具，使用 NotebookLM 內部介面，並在本機保存登入 profile 與瀏覽器認證資料。不要提交憑證、筆記本 ID 清單或個人匯出檔。
 
 1. 檢查 `uv --version`。
-2. 未安裝時執行 `uv tool install notebooklm-mcp-cli`；已安裝則用 `uv tool upgrade notebooklm-mcp-cli`。
+2. 取得同意後，未安裝時執行 `uv tool install notebooklm-mcp-cli`；已安裝則用 `uv tool upgrade notebooklm-mcp-cli`。
 3. 驗證 `nlm --version` 與 `Get-Command nlm, notebooklm-mcp`。
-4. 執行 `nlm login`，再用 `nlm login --check` 與 `nlm doctor` 驗證。
-5. 在 `~/.gemini/config/mcp_config.json` 加入：
+4. 說明本機認證影響並取得同意後，執行 `nlm login`，再用 `nlm login --check` 與 `nlm doctor` 驗證。
+5. 先解析並備份 `~/.gemini/config/mcp_config.json`，只合併 `.mcpServers.notebooklm`，保留其他 server；同名設定先顯示差異並確認，寫入後再解析驗證：
 
 ```json
 {

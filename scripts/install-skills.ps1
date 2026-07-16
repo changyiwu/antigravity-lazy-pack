@@ -1,4 +1,4 @@
-﻿[CmdletBinding(SupportsShouldProcess)]
+﻿[CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High')]
 param(
     [string[]]$Skill = @(),
     [switch]$All,
@@ -10,14 +10,14 @@ $ErrorActionPreference = 'Stop'
 
 $Root = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..')).Path
 $TargetRoot = Join-Path ([Environment]::GetFolderPath('UserProfile')) '.gemini\config\skills'
-$SkillMap = [ordered]@{
-    'antigravity-install-all' = 'skills\00-install-all'
-    'antigravity-notebooklm' = 'skills\01-notebooklm'
-    'antigravity-github' = 'skills\02-github'
-    'antigravity-firebase' = 'skills\03-firebase'
-    'antigravity-draw' = 'skills\04-draw'
-    'antigravity-workflow' = 'skills\05-workflow'
-    'antigravity-obsidian' = 'skills\06-obsidian'
+$ManifestPath = Join-Path $PSScriptRoot 'skill-manifest.psd1'
+$Manifest = Import-PowerShellDataFile -LiteralPath $ManifestPath
+$SkillMap = [ordered]@{}
+foreach ($Entry in @($Manifest.Skills)) {
+    if ($SkillMap.Contains($Entry.Name)) {
+        throw "Skill manifest 名稱重複：$($Entry.Name)"
+    }
+    $SkillMap[$Entry.Name] = $Entry.Source
 }
 
 if ($All -and $Skill.Count -gt 0) {
@@ -34,10 +34,6 @@ foreach ($Name in $Selected) {
     }
 }
 
-if ($PSCmdlet.ShouldProcess($TargetRoot, '建立 AntiGravity 全域 Skill 目錄')) {
-    New-Item -ItemType Directory -Force -Path $TargetRoot | Out-Null
-}
-
 $Results = foreach ($Name in $Selected) {
     $Source = Join-Path $Root $SkillMap[$Name]
     $Target = Join-Path $TargetRoot $Name
@@ -51,12 +47,16 @@ $Results = foreach ($Name in $Selected) {
         continue
     }
 
-    if ($PSCmdlet.ShouldProcess($Target, "安裝 $Name")) {
+    $Approved = $PSCmdlet.ShouldProcess($Target, "安裝 $Name")
+    if ($Approved) {
+        New-Item -ItemType Directory -Force -Path $TargetRoot | Out-Null
         New-Item -ItemType Directory -Force -Path $Target | Out-Null
         Copy-Item -Path (Join-Path $Source '*') -Destination $Target -Recurse -Force
     }
     $Status = if ($WhatIfPreference) {
         '模擬，未寫入'
+    } elseif (-not $Approved) {
+        '使用者跳過'
     } elseif ($Force) {
         '已安裝／更新'
     } else {

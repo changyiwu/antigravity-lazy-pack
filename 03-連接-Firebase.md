@@ -18,6 +18,8 @@
 
 Windows 使用 `npx.cmd`，避免 PowerShell 執行原則攔截 `.ps1`：
 
+`npx.cmd -y` 可能下載並執行最新版套件；首次執行或版本改變時，先回報即將使用的套件名稱並取得同意。
+
 ```powershell
 npx.cmd -y firebase-tools@latest --version
 npx.cmd -y firebase-tools@latest login
@@ -40,6 +42,14 @@ Get-Location
 ## 步驟三：註冊 MCP
 
 在 `~/.gemini/config/mcp_config.json` 加入：
+
+修改設定時必須使用合併流程：
+
+1. 若檔案已存在，先用 `Get-Content -Raw | ConvertFrom-Json` 確認 JSON 合法。
+2. 寫入前建立帶時間戳的備份。
+3. 只新增或更新 `.mcpServers.firebase`，保留其他 server；下方範例不可覆蓋整份既有設定。
+4. 若同名 server 已存在，先顯示差異並取得更新同意。
+5. 寫入後再次解析 JSON 驗證。
 
 ```json
 {

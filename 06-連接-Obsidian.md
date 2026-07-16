@@ -44,6 +44,14 @@ C:\Users\<使用者>\AppData\Roaming\npm\mcpvault.cmd
 
 在 `~/.gemini/config/mcp_config.json` 加入：
 
+修改設定時必須使用合併流程：
+
+1. 若檔案已存在，先用 `Get-Content -Raw | ConvertFrom-Json` 確認 JSON 合法。
+2. 寫入前建立帶時間戳的備份。
+3. 只新增或更新 `.mcpServers.obsidian`，保留其他 server；下方範例不可覆蓋整份既有設定。
+4. 若同名 server 已存在，先顯示差異並取得更新同意。
+5. 寫入後再次解析 JSON 驗證。
+
 ```json
 {
   "mcpServers": {
