@@ -4,7 +4,6 @@
 
 ## 目前檔案
 
-- `04-第二大腦設定指南.md`：第二大腦設定指南 (AntiGravity 版)，建立 Karpathy 式 AI 筆記流（輸入/消化/輸出）的三層資料夾結構、ANTIGRAVITY.md 規則檔、常用筆記模板，以及每週日自動執行知識重整的排程設定。
 - `09-AntiGravity專屬懶人包.md`：主懶人包，整理 NotebookLM、Firebase、GitHub 與開工 / 收工 / 新專案初始化流程；Obsidian 只保留為人工專案筆記，不再安裝 MCPVault。
 - `.gitignore`：排除本機設定、NotebookLM 匯出、生成圖片、測試 app、API key 與暫存資料。
 

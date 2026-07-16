@@ -4,7 +4,7 @@
 
 專案名稱：antigravity-lazy-pack
 專案用途：Anti-Gravity 專屬服務連接與工作流程設定懶人包
-主要工作目錄：C:\Users\chang\我的雲端硬碟\agents\antigravity\antigravity-lazy-pack
+主要工作目錄：c:\Users\chang\我的雲端硬碟\agents\antigravity-lazy-pack
 GitHub repo：https://github.com/changyiwu/antigravity-lazy-pack.git
 預設 branch：main
 
