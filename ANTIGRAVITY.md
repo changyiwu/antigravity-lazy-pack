@@ -18,6 +18,8 @@ Obsidian vault：C:\Users\chang\我的雲端硬碟\2ndbrain
 - 回應使用繁體中文。
 - 涉及檔案操作時回報完整產出位置。
 - 使用 PowerShell 語法。
+- `ANTIGRAVITY.md` 是本專案的主要規則入口；不要改用 `AGENTS.md` 取代。
+- 全域 Skill 統一安裝到 `~/.gemini/config/skills/<skill-name>/`；Windows 對應路徑為 `C:\Users\<使用者>\.gemini\config\skills\<skill-name>\`。
 - 開工時讀本檔、讀 Obsidian 駕駛艙、檢查 Git 狀態（若已建立 repo）。
 - 收工時更新 Obsidian，必要時更新本檔。
 - 不把每日流水帳寫進本檔。

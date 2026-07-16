@@ -1,37 +1,88 @@
-# Anti-Gravity 懶人包
+# AntiGravity 2.0 懶人包
 
-這個 repo 只放 Anti-Gravity 使用者可公開套用的懶人包文件，不放個人 NotebookLM 清單、研究產物、生成圖片、測試專案或任何帳號資料。
+這個 repo 收錄 Google AntiGravity 使用者可公開套用的服務連接與工作流程教學。每個功能都有一份完整說明檔，以及一個對應的 Agent Skill。
 
-## 目前檔案
+本 repo 不放個人 NotebookLM 清單、研究產物、生成圖片、測試專案、API Key、token 或帳號憑證。
 
-- `09-AntiGravity專屬懶人包.md`：主懶人包，整理 NotebookLM、Firebase、GitHub 與開工 / 收工 / 新專案初始化流程；Obsidian 只保留為人工專案筆記，不再安裝 MCPVault。
-- `.gitignore`：排除本機設定、NotebookLM 匯出、生成圖片、測試 app、API key 與暫存資料。
+## 固定規則
+
+- 專案規則的主要入口是 `ANTIGRAVITY.md`。
+- 全域 Skill 統一安裝到 `~/.gemini/config/skills/<skill-name>/`。
+- Windows 對應為 `C:\Users\<使用者>\.gemini\config\skills\<skill-name>\`。
 
 ## 使用方式
 
-### 方式一：直接叫 AI 幫你裝（最簡單）
+### 方式一：請 AI 列出並安裝
 
-把這行貼給你的 AI agent：
+把這段交給你的 AI agent：
 
+```text
+這是 AntiGravity 懶人包：https://github.com/mathruffian-dot/antigravity-lazy-pack
+請讀取 README.md 與 SKILL.md，列出所有可用的懶人包，逐項問我要安裝哪些；不要未經確認就執行登入、建立專案或外部寫入。
 ```
-這是 AntiGravity 懶人包 https://github.com/mathruffian-dot/antigravity-lazy-pack
-請讀取 repo 內容，列出所有可用的懶人包，問我要裝哪些。
+
+下載或 clone 本 repo 後，可以直接安裝單一 Skill：
+
+```powershell
+.\scripts\install-skills.ps1 -Skill antigravity-notebooklm
 ```
 
-AI 會自動讀取 `SKILL.md`（安裝入口），列出 6 個技能，問你要裝哪些，然後自動安裝。
+安裝全部七個 Skill：
 
-### 方式二：手動開啟 MD 檔
+```powershell
+.\scripts\install-skills.ps1 -All
+```
 
-1. 開啟 `09-AntiGravity專屬懶人包.md`
-2. 把文件內容交給 Anti-Gravity 或 AI 編碼助理
-3. 依序完成環境檢查、OAuth 登入、NotebookLM / Firebase MCP 設定與工作流程設定
+若目標已存在，安裝器預設不覆蓋；確認要更新時才加 `-Force`。安裝完成後，Skill 會位於 `~/.gemini/config/skills/`。
+
+### 方式二：直接使用說明檔
+
+1. 開啟下表對應的 Markdown 說明檔。
+2. 把內容交給 AntiGravity 或其他 AI 編碼助理。
+3. 遇到登入、全域安裝、建立測試資料或外部寫入時，由使用者確認後再繼續。
+
+## 懶人包清單
+
+| 編號 | 完整說明 | 對應 Skill | 說明 |
+|---|---|---|---|
+| 00 | [一次安裝全部](00-一次安裝全部.md) | `antigravity-install-all` | 逐項安裝與回報六個功能 Skill |
+| 01 | [連接 NotebookLM](01-連接-NotebookLM.md) | `antigravity-notebooklm` | 第三方 NotebookLM CLI／MCP |
+| 02 | [連接 GitHub](02-連接-GitHub.md) | `antigravity-github` | Git、GitHub CLI 與登入驗證 |
+| 03 | [連接 Firebase](03-連接-Firebase.md) | `antigravity-firebase` | Firebase CLI、專案 context 與 MCP |
+| 04 | [用 AntiGravity 生圖](04-用Antigravity生圖.md) | `antigravity-draw` | 內建生圖與 OpenAI API 進階路線 |
+| 05 | [設定專案工作流程](05-設定專案工作流程.md) | `antigravity-workflow` | 開工、收工、新專案初始化 |
+| 06 | [連接 Obsidian](06-連接-Obsidian.md) | `antigravity-obsidian` | Vault 與 MCPVault |
+
+舊的單一大文件已改為[相容索引](AntiGravity專屬懶人包.md)，不再重複維護完整教學。
 
 ## 安全原則
 
-- NotebookLM 登入走瀏覽器 OAuth；不要複製 cookie、token 或私有匯出檔。
-- 不把 `notebooks.json`、NotebookLM 筆記本 ID 清單、研究報告、生成圖片放進公開 repo。
-- 不把 API key、GitHub token、Firebase Admin 憑證寫進 Markdown 或 GitHub。
-- 收工時先檢查 diff，只提交本次相關檔案，不使用無差別 `git add .`。
+- NotebookLM 整合是非 Google 官方工具，會在本機使用與保存瀏覽器認證資料。
+- 不把 API Key、GitHub token、Firebase Admin 憑證或 NotebookLM 個人清單寫進 repo。
+- 安裝 Skill 不代表授權立即登入、建立專案、建立測試資料或執行部署。
+- 測試物件建立前先確認，完成後再詢問要保留或刪除。
+- commit 前先檢查 diff，只提交本次相關檔案，不使用無差別 `git add .`。
+
+## 專案結構
+
+```text
+README.md                 使用者入口與索引
+ANTIGRAVITY.md            專案主要規則入口
+SKILL.md                  AI 安裝派送入口
+00-...06-*.md             七份完整說明
+skills/*/SKILL.md         七個精簡可執行 Skill
+scripts/                  Skill 安裝器與發布前驗證
+```
+
+## 發布前檢查
+
+修改說明檔、Skill 或腳本後執行：
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\validate-lazy-pack.ps1
+```
+
+檢查內容包括章號、Markdown 連結、說明檔與 Skill 一對一、frontmatter、固定規則入口、全域 Skill 路徑、舊指令、敏感資料樣式、UTF-8 與 Python 腳本語法。
 
 ## 相關系列
 

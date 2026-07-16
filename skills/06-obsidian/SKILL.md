@@ -1,49 +1,32 @@
 ---
 name: antigravity-obsidian
-description: 在 AntiGravity 連接 Obsidian MCP (MCPVault)。說「連接 Obsidian」「設定 Obsidian」時載入。
+description: 在 AntiGravity 透過 MCPVault 連接 Obsidian。使用者說「連接 Obsidian」「設定 Obsidian」時載入。
 ---
 
-# 連接 Obsidian（AntiGravity 版）
+# 連接 Obsidian
 
-## 步驟
+1. 找到真正使用的 vault，確認資料夾存在且包含 `.obsidian`；寫入前由使用者確認實體路徑。
+2. 全域安裝 MCPVault 前先取得同意：
 
-### 1. 找到 vault
-請先確認 Obsidian vault 的實體路徑。常見位置：
-- `C:\Users\<你>\OneDrive\文件\Secondbrain`
-- `C:\Users\<你>\Documents\<vault 名稱>`
-- `G:\我的雲端硬碟\<vault 名稱>`
-
-### 2. 安裝 MCPVault
-在命令提示字元或 PowerShell 中執行安裝：
 ```powershell
 npm.cmd install -g @bitbonsai/mcpvault
-where.exe mcpvault
-```
-常見路徑為：
-`C:\Users\<你>\AppData\Roaming\npm\mcpvault.cmd`
-
-### 3. 註冊 Obsidian MCP
-請依 AntiGravity 實際 MCP 設定方式加入設定檔：
-```json
-"obsidian": {
-  "type": "local",
-  "command": [
-    "C:\\Users\\<你>\\AppData\\Roaming\\npm\\mcpvault.cmd",
-    "C:\\Users\\<你>\\OneDrive\\文件\\Secondbrain"
-  ],
-  "enabled": true
-}
+Get-Command mcpvault
 ```
 
-如果使用 command / args 分開的格式：
+3. 在 `~/.gemini/config/mcp_config.json` 加入：
+
 ```json
 {
-  "command": "C:\\Users\\<你>\\AppData\\Roaming\\npm\\mcpvault.cmd",
-  "args": ["C:\\Users\\<你>\\OneDrive\\文件\\Secondbrain"]
+  "mcpServers": {
+    "obsidian": {
+      "command": "C:\\Users\\<使用者>\\AppData\\Roaming\\npm\\mcpvault.cmd",
+      "args": ["C:\\Users\\<使用者>\\Documents\\<vault>"]
+    }
+  }
 }
 ```
 
-### 4. 驗證
-重新啟動 AntiGravity，先測試讀取 vault 根目錄，並測試建立與讀回一篇測試筆記。
+4. 重啟 AntiGravity，先唯讀列出 vault 根目錄。
+5. 建立測試筆記前先取得同意；讀回驗證後，再詢問保留或刪除。
 
-⚠️ 安全提醒：請勿將你的實體 vault 路徑或任何敏感筆記內容 commit 到公開儲存庫中。
+安全規則：只授權必要 vault；不讀取無關私人筆記；不提交真實 vault 路徑或筆記內容；批次搬移、覆蓋或刪除前先顯示範圍並取得同意。回報 MCP 狀態、vault 驗證與測試筆記處理結果。

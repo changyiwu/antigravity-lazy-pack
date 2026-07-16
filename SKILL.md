@@ -1,37 +1,44 @@
 ---
 name: antigravity-lazy-packs
-description: AntiGravity 懶人包 — 服務連接與工作流程設定。說「AntiGravity 懶人包」「安裝 Antigravity 設定」時載入。
+description: AntiGravity 懶人包安裝入口。列出 NotebookLM、GitHub、Firebase、生圖、專案工作流程與 Obsidian 等可安裝 Skill，逐項取得同意後安裝。
 ---
 
-# AntiGravity 懶人包 — AI Agent 自動安裝入口
+# AntiGravity 懶人包安裝入口
 
-當使用者給你這個 repo 網址並說要安裝時，請依以下流程執行。
+當使用者提供本 repo 並要求安裝時，先讀取 `README.md` 與本檔，再依下列流程執行。
 
-## 步驟一：認識可用懶人包
+## 可用懶人包
 
-| 編號 | Skill 名稱 | 說明 |
-|------|-----------|------|
-| 01 | `01-notebooklm` | 連接 NotebookLM MCP |
-| 02 | `02-github` | 連接 GitHub CLI |
-| 03 | `03-firebase` | 連接 Firebase MCP |
-| 04 | `04-draw` | 生圖指引 |
-| 05 | `05-workflow` | 開工 / 收工 / 新專案初始化 |
-| 06 | `06-obsidian` | 連接 Obsidian MCP (MCPVault) |
-| 00 | `00-install-all` | 一次安裝全部 |
+| 編號 | 完整 Skill 名稱 | 說明檔 |
+|---|---|---|
+| 00 | `antigravity-install-all` | `00-一次安裝全部.md` |
+| 01 | `antigravity-notebooklm` | `01-連接-NotebookLM.md` |
+| 02 | `antigravity-github` | `02-連接-GitHub.md` |
+| 03 | `antigravity-firebase` | `03-連接-Firebase.md` |
+| 04 | `antigravity-draw` | `04-用Antigravity生圖.md` |
+| 05 | `antigravity-workflow` | `05-設定專案工作流程.md` |
+| 06 | `antigravity-obsidian` | `06-連接-Obsidian.md` |
 
-## 步驟二：讓使用者選擇
+## 安裝流程
 
-列出上表給使用者看，然後問：「你要安裝哪些？輸入全部或編號組合（例如 01, 02, 03）。」
+1. 列出上表與目前安裝狀態。
+2. 問使用者要安裝哪些；接受「全部」或編號組合。
+3. 將編號轉成上表的完整 Skill 名稱。
+4. 每一項安裝前逐項確認，不把安裝 Skill 當成執行外部登入或寫入的授權。
+5. 在 repo 根目錄使用：
 
-## 步驟三：依序安裝
-
-對選取的每個 skill：
-```bash
-npx skills add mathruffian-dot/antigravity-lazy-pack --skill <skill名稱> -g -y
+```powershell
+.\scripts\install-skills.ps1 -Skill <完整 Skill 名稱>
 ```
 
-若 `npx skills add` 無法使用，改為手動：讀取 `skills/<名稱>/SKILL.md` 內容並執行。
+全域安裝目標固定為：
 
-## 步驟四：回報結果
+```text
+~/.gemini/config/skills/<skill-name>/
+```
 
-每項回報安裝狀態（✅/⚠️/❌），最後列總表。
+安裝器預設不覆蓋既有目標；只有使用者確認更新時才加 `-Force`。如果無法執行 PowerShell 安裝器，才手動複製對應的 `skills/<資料夾>/` 到上述目錄。
+
+## 回報
+
+每項分別回報：已安裝／已存在／跳過／失敗，以及實際安裝路徑。若流程中途停止，明確說明已寫入哪些檔案與如何復原。
