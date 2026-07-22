@@ -18,12 +18,8 @@
             Source = 'skills\04-draw'
         }
         @{
-            Name = 'antigravity-workflow'
-            Source = 'skills\05-workflow'
-        }
-        @{
             Name = 'antigravity-obsidian'
-            Source = 'skills\06-obsidian'
+            Source = 'skills\05-obsidian'
         }
     )
 }
