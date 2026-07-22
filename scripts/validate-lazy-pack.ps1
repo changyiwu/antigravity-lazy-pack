@@ -308,3 +308,4 @@ if ($Failures.Count -gt 0) {
 }
 
 Write-Host 'Validation passed: chapters, five Skills, manifest, installer simulation, links, JSON examples, rules, paths, safety patterns, UTF-8 text, PowerShell, Python, license, and release files are valid.' -ForegroundColor Green
+exit 0
