@@ -57,8 +57,7 @@ $ExpectedChapters = [ordered]@{
     '02-連接-GitHub.md' = [pscustomobject]@{ Name = 'antigravity-github'; Source = 'skills\02-github' }
     '03-連接-Firebase.md' = [pscustomobject]@{ Name = 'antigravity-firebase'; Source = 'skills\03-firebase' }
     '04-用Antigravity生圖.md' = [pscustomobject]@{ Name = 'antigravity-draw'; Source = 'skills\04-draw' }
-    '05-設定專案工作流程.md' = [pscustomobject]@{ Name = 'antigravity-workflow'; Source = 'skills\05-workflow' }
-    '06-連接-Obsidian.md' = [pscustomobject]@{ Name = 'antigravity-obsidian'; Source = 'skills\06-obsidian' }
+    '05-連接-Obsidian.md' = [pscustomobject]@{ Name = 'antigravity-obsidian'; Source = 'skills\05-obsidian' }
 }
 $ExpectedSkills = @($ExpectedChapters.Values | Where-Object { $null -ne $_ })
 
@@ -197,12 +196,12 @@ foreach ($File in $TextFiles) {
     }
 }
 
-$Rules = Get-Content -Raw -Encoding UTF8 -LiteralPath (Join-Path $Root 'ANTIGRAVITY.md')
-if ($Rules -notmatch [regex]::Escape('`ANTIGRAVITY.md` 是本專案的主要規則入口')) {
-    Add-Failure 'ANTIGRAVITY.md 未宣告自己是主要規則入口'
+$Rules = Get-Content -Raw -Encoding UTF8 -LiteralPath (Join-Path $Root 'agents.md')
+if ($Rules -notmatch [regex]::Escape('跨 Agent 專案規則')) {
+    Add-Failure 'agents.md 未宣告跨 Agent 專案規則入口'
 }
 if ($Rules -notmatch [regex]::Escape($RequiredSkillPath)) {
-    Add-Failure "ANTIGRAVITY.md 未使用標準全域 Skill 路徑：$RequiredSkillPath"
+    Add-Failure "agents.md 未使用標準全域 Skill 路徑：$RequiredSkillPath"
 }
 
 $Readme = Get-Content -Raw -Encoding UTF8 -LiteralPath (Join-Path $Root 'README.md')
@@ -308,4 +307,4 @@ if ($Failures.Count -gt 0) {
     exit 1
 }
 
-Write-Host 'Validation passed: chapters, six Skills, manifest, installer simulation, links, JSON examples, rules, paths, safety patterns, UTF-8 text, PowerShell, Python, license, and release files are valid.' -ForegroundColor Green
+Write-Host 'Validation passed: chapters, five Skills, manifest, installer simulation, links, JSON examples, rules, paths, safety patterns, UTF-8 text, PowerShell, Python, license, and release files are valid.' -ForegroundColor Green
