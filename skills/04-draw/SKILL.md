@@ -14,7 +14,7 @@ description: 使用 Antigravity IDE 當前實際可用的內建工具或 OpenAI 
 只有使用者明確指定 OpenAI 時才使用：
 
 ```powershell
-python .\skills\04-draw\scripts\draw_openai.py --prompt "<英文提示詞>" --output "<輸出路徑.png>" --model gpt-image-2 --output-format png --quality low
+python "$HOME/.gemini/config/skills/antigravity-draw/scripts/draw_openai.py" --prompt "<英文提示詞>" --output "<輸出路徑.png>" --model gpt-image-2 --output-format png --quality low
 ```
 
 API Key 只能從 `OPENAI_API_KEY` 環境變數讀取，禁止寫進腳本、Skill、Markdown 或 Git。支援 quality：`low`、`medium`、`high`；支援格式：`png`、`jpeg`、`webp`，副檔名必須一致。
