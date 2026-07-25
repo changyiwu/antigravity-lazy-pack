@@ -54,7 +54,7 @@
 | 04 | [用 AntiGravity 生圖](04-用Antigravity生圖.md) | `antigravity-draw` | 內建生圖與 OpenAI API 進階路線 |
 | 05 | [連接 Obsidian](05-連接-Obsidian.md) | `antigravity-obsidian` | Vault 與 MCPVault |
 
-舊的單一大文件已改為[相容索引](AntiGravity專屬懶人包.md)，不再重複維護完整教學。
+完整教學已於 2026-07-17 拆分為上表的 00–05 六份說明檔；舊的單一大文件與其相容索引均已移除。
 
 ## 安全原則
 

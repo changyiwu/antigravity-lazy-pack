@@ -24,7 +24,6 @@ Antigravity IDE 2.0 專屬的服務連接與生圖懶人包。與 `claude-code-l
 antigravity-lazy-pack/
 ├─ README.md                    # 使用者入口
 ├─ SKILL.md                     # 懶人包入口 Skill
-├─ AntiGravity專屬懶人包.md      # 總覽文件
 ├─ 00-一次安裝全部.md
 ├─ 01-連接-NotebookLM.md
 ├─ 02-連接-GitHub.md
