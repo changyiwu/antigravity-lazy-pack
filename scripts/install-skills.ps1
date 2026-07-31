@@ -2,7 +2,8 @@
 param(
     [string[]]$Skill = @(),
     [switch]$All,
-    [switch]$Force
+    [switch]$Force,
+    [switch]$MigrateLegacy
 )
 
 Set-StrictMode -Version Latest
@@ -17,7 +18,7 @@ foreach ($Entry in @($Manifest.Skills)) {
     if ($SkillMap.Contains($Entry.Name)) {
         throw "Skill manifest 名稱重複：$($Entry.Name)"
     }
-    $SkillMap[$Entry.Name] = $Entry.Source
+    $SkillMap[$Entry.Name] = $Entry
 }
 
 if ($All -and $Skill.Count -gt 0) {
@@ -35,34 +36,81 @@ foreach ($Name in $Selected) {
 }
 
 $Results = foreach ($Name in $Selected) {
-    $Source = Join-Path $Root $SkillMap[$Name]
+    $Entry = $SkillMap[$Name]
+    $Source = Join-Path $Root $Entry.Source
     $Target = Join-Path $TargetRoot $Name
+    $LegacyNames = if ($Entry.ContainsKey('LegacyNames')) { @($Entry.LegacyNames) } else { @() }
+    $LegacyTargets = @(
+        foreach ($LegacyName in $LegacyNames) {
+            $LegacyTarget = Join-Path $TargetRoot $LegacyName
+            if (Test-Path -LiteralPath $LegacyTarget) {
+                $LegacyTarget
+            }
+        }
+    )
 
     if (-not (Test-Path -LiteralPath (Join-Path $Source 'SKILL.md'))) {
         throw "來源 Skill 不完整：$Source"
     }
 
-    if ((Test-Path -LiteralPath $Target) -and -not $Force) {
-        [pscustomobject]@{ Skill = $Name; Status = '已存在，未覆蓋'; Path = $Target }
+    if ($LegacyTargets.Count -gt 0 -and -not $MigrateLegacy) {
+        [pscustomobject]@{
+            Skill = $Name
+            Status = '偵測到舊名稱，未安裝；確認後使用 -MigrateLegacy'
+            Path = $Target
+            Legacy = $LegacyTargets -join ', '
+        }
         continue
     }
 
-    $Approved = $PSCmdlet.ShouldProcess($Target, "安裝 $Name")
-    if ($Approved) {
-        New-Item -ItemType Directory -Force -Path $TargetRoot | Out-Null
-        New-Item -ItemType Directory -Force -Path $Target | Out-Null
-        Copy-Item -Path (Join-Path $Source '*') -Destination $Target -Recurse -Force
-    }
-    $Status = if ($WhatIfPreference) {
-        '模擬，未寫入'
-    } elseif (-not $Approved) {
-        '使用者跳過'
-    } elseif ($Force) {
-        '已安裝／更新'
+    $TargetReady = $false
+    $Status = $null
+    if ((Test-Path -LiteralPath $Target) -and -not $Force) {
+        $InstalledSkill = Join-Path $Target 'SKILL.md'
+        if (-not (Test-Path -LiteralPath $InstalledSkill)) {
+            [pscustomobject]@{ Skill = $Name; Status = '目標已存在但缺少 SKILL.md，未處理'; Path = $Target; Legacy = '' }
+            continue
+        }
+        $InstalledContent = Get-Content -Raw -Encoding UTF8 -LiteralPath $InstalledSkill
+        if ($InstalledContent -notmatch "(?m)^name:\s*$([regex]::Escape($Name))\s*$") {
+            [pscustomobject]@{ Skill = $Name; Status = '目標已存在但 name 不符，未處理'; Path = $Target; Legacy = '' }
+            continue
+        }
+        $TargetReady = $true
+        $Status = '已存在，未覆蓋'
     } else {
-        '已安裝'
+        $Approved = $PSCmdlet.ShouldProcess($Target, "安裝 $Name")
+        if ($Approved) {
+            New-Item -ItemType Directory -Force -Path $TargetRoot | Out-Null
+            New-Item -ItemType Directory -Force -Path $Target | Out-Null
+            Copy-Item -Path (Join-Path $Source '*') -Destination $Target -Recurse -Force
+            $TargetReady = $true
+        }
+        $Status = if ($WhatIfPreference) {
+            '模擬，未寫入'
+        } elseif (-not $Approved) {
+            '使用者跳過'
+        } elseif ($Force) {
+            '已安裝／更新'
+        } else {
+            '已安裝'
+        }
     }
-    [pscustomobject]@{ Skill = $Name; Status = $Status; Path = $Target }
+
+    $LegacyStatus = ''
+    if ($MigrateLegacy -and $TargetReady -and $LegacyTargets.Count -gt 0) {
+        $LegacyResults = foreach ($LegacyTarget in $LegacyTargets) {
+            $LegacyApproved = $PSCmdlet.ShouldProcess($LegacyTarget, "移除已由 $Name 取代的舊版 Skill")
+            if ($LegacyApproved) {
+                Remove-Item -LiteralPath $LegacyTarget -Recurse -Force
+                "已移除：$LegacyTarget"
+            } else {
+                "未移除：$LegacyTarget"
+            }
+        }
+        $LegacyStatus = $LegacyResults -join '; '
+    }
+    [pscustomobject]@{ Skill = $Name; Status = $Status; Path = $Target; Legacy = $LegacyStatus }
 }
 
 $Results | Format-Table -AutoSize

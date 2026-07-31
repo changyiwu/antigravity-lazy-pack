@@ -12,7 +12,7 @@ Antigravity IDE 2.0 專屬的服務連接與生圖懶人包。與 `claude-code-l
 
 ## 目標與路線圖
 
-- [x] 階段一：五個功能 Skill 成形（一次安裝全部、NotebookLM、GitHub、Firebase、生圖、Obsidian）
+- [x] 階段一：五個功能 Skill 成形（一次安裝全部、Gemini Notebook、GitHub、Firebase、生圖、Obsidian）
 - [x] 階段二：移除內建工作流程 Skill，Obsidian 重編為 #05，規則入口由 `ANTIGRAVITY.md` 遷移為 `agents.md`
 - [x] 階段三：發布驗證通過，文件／manifest／安裝器／Skill 編號全數同步
 - [ ] 階段四：重跑全域 Skill 安裝，確認五個 Antigravity Skills 均為最新版
@@ -25,7 +25,7 @@ antigravity-lazy-pack/
 ├─ README.md                    # 使用者入口
 ├─ SKILL.md                     # 懶人包入口 Skill
 ├─ 00-一次安裝全部.md
-├─ 01-連接-NotebookLM.md
+├─ 01-連接-Gemini-Notebook.md
 ├─ 02-連接-GitHub.md
 ├─ 03-連接-Firebase.md
 ├─ 04-用Antigravity生圖.md
@@ -64,7 +64,7 @@ antigravity-lazy-pack/
 ## 安全與隱私
 
 - 不要 commit API key、token、密碼或 Firebase Admin 憑證
-- 不要 commit NotebookLM 個人匯出清單或筆記本 ID 清單
+- 不要 commit Gemini Notebook 個人匯出清單或筆記本 ID 清單
 - 不要提交真實 Vault 路徑或私人筆記內容
 - 不要自動納入無關的 Git 變更
 - 不要儲存學生真名；正式資料只使用班級代號與座號
@@ -73,3 +73,6 @@ antigravity-lazy-pack/
 
 - 2026-07-22：移除內建工作流程 Skill、將 Obsidian 懶人包重編為 #05，並把專案規則入口由 `ANTIGRAVITY.md` 遷移為本檔；發布驗證已通過。
 - 2026-07-24：專案藍圖改用標準範本格式（補上路線圖 checklist、資料夾結構與同步層級表）。
+- 2026-08-01：NotebookLM 品牌更新為 Gemini Notebook；上游 Repo 改名，保留既有 PyPI 套件與執行檔技術名稱以維持相容。
+- 2026-08-01：全域 Skill 已由 `antigravity-notebooklm` 遷移為 `antigravity-gemini-notebook`；MCP key 同步改為 `gemini-notebook`，其餘服務設定保持不變。
+- 2026-08-01：全域 Skill 已由 `antigravity-notebooklm` 遷移為 `antigravity-gemini-notebook`；MCP key 同步改為 `gemini-notebook`，其餘服務設定保持不變。

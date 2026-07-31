@@ -1,6 +1,6 @@
 ---
 name: antigravity-lazy-packs
-description: Antigravity IDE 懶人包安裝入口。列出 NotebookLM、GitHub、Firebase、生圖與 Obsidian 等五個可安裝 Skill，逐項取得同意後安裝。
+description: Antigravity IDE 懶人包安裝入口。列出 Gemini Notebook（原 NotebookLM）、GitHub、Firebase、生圖與 Obsidian 等五個可安裝 Skill，逐項取得同意後安裝。
 ---
 
 # AntiGravity 懶人包安裝入口
@@ -13,7 +13,7 @@ description: Antigravity IDE 懶人包安裝入口。列出 NotebookLM、GitHub�
 
 | 編號 | 完整 Skill 名稱 | 說明檔 |
 |---|---|---|
-| 01 | `antigravity-notebooklm` | `01-連接-NotebookLM.md` |
+| 01 | `antigravity-gemini-notebook` | `01-連接-Gemini-Notebook.md` |
 | 02 | `antigravity-github` | `02-連接-GitHub.md` |
 | 03 | `antigravity-firebase` | `03-連接-Firebase.md` |
 | 04 | `antigravity-draw` | `04-用Antigravity生圖.md` |
@@ -37,7 +37,7 @@ description: Antigravity IDE 懶人包安裝入口。列出 NotebookLM、GitHub�
 ~/.gemini/config/skills/<skill-name>/
 ```
 
-安裝器預設逐項要求確認，且不覆蓋既有目標；只有使用者確認更新時才加 `-Force`。`00-一次安裝全部.md` 與本檔只負責第一次安裝，不會安裝成額外 Skill。只有已在外部流程取得完整授權的自動化情境，才使用 `-Confirm:$false`。如果無法執行 PowerShell 安裝器，才手動複製對應的 `skills/<資料夾>/` 到上述目錄。
+安裝器預設逐項要求確認，且不覆蓋既有目標；只有使用者確認更新時才加 `-Force`。若偵測到舊版 `antigravity-notebooklm`，先列出舊、新完整路徑；取得同意後才加 `-MigrateLegacy`，安裝新版並移除舊版，避免兩個 Skill 同時觸發。`00-一次安裝全部.md` 與本檔只負責第一次安裝，不會安裝成額外 Skill。只有已在外部流程取得完整授權的自動化情境，才使用 `-Confirm:$false`。如果無法執行 PowerShell 安裝器，才手動複製對應的 `skills/<資料夾>/` 到上述目錄。
 
 ## 回報
 

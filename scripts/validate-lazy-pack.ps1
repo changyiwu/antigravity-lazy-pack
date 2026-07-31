@@ -53,7 +53,7 @@ function Test-SkillFile {
 
 $ExpectedChapters = [ordered]@{
     '00-一次安裝全部.md' = $null
-    '01-連接-NotebookLM.md' = [pscustomobject]@{ Name = 'antigravity-notebooklm'; Source = 'skills\01-notebooklm' }
+    '01-連接-Gemini-Notebook.md' = [pscustomobject]@{ Name = 'antigravity-gemini-notebook'; Source = 'skills\01-gemini-notebook' }
     '02-連接-GitHub.md' = [pscustomobject]@{ Name = 'antigravity-github'; Source = 'skills\02-github' }
     '03-連接-Firebase.md' = [pscustomobject]@{ Name = 'antigravity-firebase'; Source = 'skills\03-firebase' }
     '04-用Antigravity生圖.md' = [pscustomobject]@{ Name = 'antigravity-draw'; Source = 'skills\04-draw' }
@@ -113,6 +113,13 @@ foreach ($ManifestSkill in $ManifestSkills) {
     }
 }
 
+$GeminiNotebookSkill = @($ManifestSkills | Where-Object { $_.Name -eq 'antigravity-gemini-notebook' })
+if ($GeminiNotebookSkill.Count -eq 1) {
+    if (-not $GeminiNotebookSkill[0].ContainsKey('LegacyNames') -or @($GeminiNotebookSkill[0].LegacyNames) -notcontains 'antigravity-notebooklm') {
+        Add-Failure 'Gemini Notebook Skill manifest 缺少舊名稱 antigravity-notebooklm 的遷移宣告'
+    }
+}
+
 $SkillFiles = @(Get-ChildItem -LiteralPath (Join-Path $Root 'skills') -Recurse -File -Filter 'SKILL.md')
 if ($SkillFiles.Count -ne $ExpectedSkills.Count) {
     Add-Failure "功能 Skill 數量應為 $($ExpectedSkills.Count)，實際為 $($SkillFiles.Count)"
@@ -125,6 +132,11 @@ Test-SkillFile -Path (Join-Path $Root 'SKILL.md') -ExpectedName 'antigravity-laz
 
 if (Test-Path -LiteralPath (Join-Path $Root 'skills\00-install-all\SKILL.md')) {
     Add-Failure '00 是安裝派送入口，不應再存在 skills\00-install-all\SKILL.md'
+}
+foreach ($LegacyPath in @('01-連接-NotebookLM.md', 'skills\01-notebooklm')) {
+    if (Test-Path -LiteralPath (Join-Path $Root $LegacyPath)) {
+        Add-Failure "仍存在舊版 Gemini Notebook 路徑：$LegacyPath"
+    }
 }
 
 $TextExtensions = @('.md', '.py', '.ps1', '.psd1', '.yml', '.yaml', '.json')
@@ -210,6 +222,29 @@ if ($Readme -notmatch [regex]::Escape('https://github.com/changyiwu/antigravity-
 }
 if ($Readme -match [regex]::Escape('https://github.com/mathruffian-dot/antigravity-lazy-pack')) {
     Add-Failure 'README.md 仍包含舊的 Antigravity repo 入口'
+}
+if ($Readme -notmatch [regex]::Escape('https://github.com/jacob-bd/gemini-notebook-mcp-cli')) {
+    Add-Failure 'README.md 缺少 Gemini Notebook MCP 新 Repo 入口'
+}
+
+$GeminiGuide = Get-Content -Raw -Encoding UTF8 -LiteralPath (Join-Path $Root '01-連接-Gemini-Notebook.md')
+foreach ($RequiredGeminiText in @(
+    'Gemini Notebook',
+    'https://github.com/jacob-bd/gemini-notebook-mcp-cli',
+    'notebooklm-mcp-cli',
+    'nlm setup list',
+    '~/.gemini/config/mcp_config.json',
+    '~/.gemini/antigravity/mcp_config.json',
+    '不要執行 `nlm setup add antigravity`',
+    '"gemini-notebook"',
+    '"command": "notebooklm-mcp"'
+)) {
+    if ($GeminiGuide -notmatch [regex]::Escape($RequiredGeminiText)) {
+        Add-Failure "Gemini Notebook 說明缺少：$RequiredGeminiText"
+    }
+}
+if ($GeminiGuide -match '(?m)^\s*"notebooklm"\s*:') {
+    Add-Failure 'Gemini Notebook 說明仍使用舊 MCP server key：notebooklm'
 }
 
 $GitIgnore = Get-Content -Raw -Encoding UTF8 -LiteralPath (Join-Path $Root '.gitignore')

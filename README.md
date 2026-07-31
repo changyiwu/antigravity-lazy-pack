@@ -4,7 +4,7 @@
 
 目前主要支援 Windows 10／11 與 PowerShell，不適用於 Antigravity CLI。IDE 與 CLI 的全域 Skill 目錄不同，本專案只使用下方固定的 IDE 路徑。
 
-本 repo 不放個人 NotebookLM 清單、研究產物、生成圖片、測試專案、API Key、token 或帳號憑證。
+本 repo 不放個人 Gemini Notebook（原 NotebookLM）清單、研究產物、生成圖片、測試專案、API Key、token 或帳號憑證。
 
 ## 固定規則
 
@@ -26,7 +26,7 @@
 下載或 clone 本 repo 後，可以直接安裝單一 Skill：
 
 ```powershell
-.\scripts\install-skills.ps1 -Skill antigravity-notebooklm
+.\scripts\install-skills.ps1 -Skill antigravity-gemini-notebook
 ```
 
 安裝全部五個功能 Skill：
@@ -35,7 +35,7 @@
 .\scripts\install-skills.ps1 -All
 ```
 
-安裝器會逐項要求確認；若目標已存在，預設不覆蓋，確認要更新時才加 `-Force`。只有已在外部流程取得完整授權的自動化情境，才使用 `-Confirm:$false`。安裝完成後，Skill 會位於 `~/.gemini/config/skills/`。
+安裝器會逐項要求確認；若目標已存在，預設不覆蓋，確認要更新時才加 `-Force`。偵測到舊版 `antigravity-notebooklm` 時會先停止，確認要以新版取代後才使用 `-MigrateLegacy`。只有已在外部流程取得完整授權的自動化情境，才使用 `-Confirm:$false`。安裝完成後，Skill 會位於 `~/.gemini/config/skills/`。
 
 ### 方式二：直接使用說明檔
 
@@ -48,7 +48,7 @@
 | 編號 | 完整說明 | 對應 Skill | 說明 |
 |---|---|---|---|
 | 00 | [一次安裝全部](00-一次安裝全部.md) | 安裝派送入口，不另行安裝 | 逐項安裝與回報五個功能 Skill |
-| 01 | [連接 NotebookLM](01-連接-NotebookLM.md) | `antigravity-notebooklm` | 第三方 NotebookLM CLI／MCP |
+| 01 | [連接 Gemini Notebook](01-連接-Gemini-Notebook.md) | `antigravity-gemini-notebook` | 第三方 [Gemini Notebook CLI／MCP](https://github.com/jacob-bd/gemini-notebook-mcp-cli) |
 | 02 | [連接 GitHub](02-連接-GitHub.md) | `antigravity-github` | Git、GitHub CLI 與登入驗證 |
 | 03 | [連接 Firebase](03-連接-Firebase.md) | `antigravity-firebase` | Firebase CLI、專案 context 與 MCP |
 | 04 | [用 AntiGravity 生圖](04-用Antigravity生圖.md) | `antigravity-draw` | 內建生圖與 OpenAI API 進階路線 |
@@ -58,8 +58,8 @@
 
 ## 安全原則
 
-- NotebookLM 整合是非 Google 官方工具，會在本機使用與保存瀏覽器認證資料。
-- 不把 API Key、GitHub token、Firebase Admin 憑證或 NotebookLM 個人清單寫進 repo。
+- Gemini Notebook 整合是非 Google 官方工具，會在本機使用與保存瀏覽器認證資料。
+- 不把 API Key、GitHub token、Firebase Admin 憑證或 Gemini Notebook 個人清單寫進 repo。
 - 安裝 Skill 不代表授權立即登入、建立專案、建立測試資料或執行部署。
 - 測試物件建立前先確認，完成後再詢問要保留或刪除。
 - commit 前先檢查 diff，只提交本次相關檔案，不使用無差別 `git add .`。

@@ -1,9 +1,10 @@
 @{
-    Version = 1
+    Version = 2
     Skills = @(
         @{
-            Name = 'antigravity-notebooklm'
-            Source = 'skills\01-notebooklm'
+            Name = 'antigravity-gemini-notebook'
+            Source = 'skills\01-gemini-notebook'
+            LegacyNames = @('antigravity-notebooklm')
         }
         @{
             Name = 'antigravity-github'

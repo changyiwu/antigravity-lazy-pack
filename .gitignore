@@ -30,10 +30,12 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# NotebookLM and private exports
+# Gemini Notebook (formerly NotebookLM) and private exports
 notebooks.json
 notebooklm/
 NotebookLM/
+gemini-notebook/
+Gemini-Notebook/
 exports/
 downloads/
 
