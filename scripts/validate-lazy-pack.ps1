@@ -55,9 +55,9 @@ $ExpectedChapters = [ordered]@{
     '00-一次安裝全部.md' = $null
     '01-連接-Gemini-Notebook.md' = [pscustomobject]@{ Name = 'antigravity-gemini-notebook'; Source = 'skills\01-gemini-notebook' }
     '02-連接-GitHub.md' = [pscustomobject]@{ Name = 'antigravity-github'; Source = 'skills\02-github' }
-    '03-連接-Firebase.md' = [pscustomobject]@{ Name = 'antigravity-firebase'; Source = 'skills\03-firebase' }
-    '04-用Antigravity生圖.md' = [pscustomobject]@{ Name = 'antigravity-draw'; Source = 'skills\04-draw' }
-    '05-連接-Obsidian.md' = [pscustomobject]@{ Name = 'antigravity-obsidian'; Source = 'skills\05-obsidian' }
+    '03-連接-Obsidian.md' = [pscustomobject]@{ Name = 'antigravity-obsidian'; Source = 'skills\03-obsidian' }
+    '04-連接-Firebase.md' = [pscustomobject]@{ Name = 'antigravity-firebase'; Source = 'skills\04-firebase' }
+    '05-用Antigravity生圖.md' = [pscustomobject]@{ Name = 'antigravity-draw'; Source = 'skills\05-draw' }
 }
 $ExpectedSkills = @($ExpectedChapters.Values | Where-Object { $null -ne $_ })
 
@@ -309,7 +309,7 @@ foreach ($Candidate in @(
 if (-not $PythonCommand) {
     Add-Failure '找不到可執行的 python 或 py -3，無法驗證 draw_openai.py'
 } else {
-    $DrawScript = Join-Path $Root 'skills\04-draw\scripts\draw_openai.py'
+    $DrawScript = Join-Path $Root 'skills\05-draw\scripts\draw_openai.py'
     & $PythonCommand @PythonPrefix -c "import ast, pathlib, sys; ast.parse(pathlib.Path(sys.argv[1]).read_text(encoding='utf-8'))" $DrawScript
     if ($LASTEXITCODE -ne 0) {
         Add-Failure 'draw_openai.py Python AST 驗證失敗'

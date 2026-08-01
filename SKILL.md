@@ -15,9 +15,9 @@ description: Antigravity IDE 懶人包安裝入口。列出 Gemini Notebook（�
 |---|---|---|
 | 01 | `antigravity-gemini-notebook` | `01-連接-Gemini-Notebook.md` |
 | 02 | `antigravity-github` | `02-連接-GitHub.md` |
-| 03 | `antigravity-firebase` | `03-連接-Firebase.md` |
-| 04 | `antigravity-draw` | `04-用Antigravity生圖.md` |
-| 05 | `antigravity-obsidian` | `05-連接-Obsidian.md` |
+| 03 | `antigravity-obsidian` | `03-連接-Obsidian.md` |
+| 04 | `antigravity-firebase` | `04-連接-Firebase.md` |
+| 05 | `antigravity-draw` | `05-用Antigravity生圖.md` |
 
 ## 安裝流程
 

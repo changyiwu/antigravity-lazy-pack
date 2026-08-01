@@ -1,4 +1,4 @@
-# AntiGravity 懶人包 #03：連接 Firebase
+# AntiGravity 懶人包 #04：連接 Firebase
 
 > 版本：v2.0
 >

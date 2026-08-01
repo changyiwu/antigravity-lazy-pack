@@ -1,4 +1,4 @@
-# AntiGravity 懶人包 #05：連接 Obsidian
+# AntiGravity 懶人包 #03：連接 Obsidian
 
 > 版本：v2.0
 >

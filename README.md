@@ -50,11 +50,16 @@
 | 00 | [一次安裝全部](00-一次安裝全部.md) | 安裝派送入口，不另行安裝 | 逐項安裝與回報五個功能 Skill |
 | 01 | [連接 Gemini Notebook](01-連接-Gemini-Notebook.md) | `antigravity-gemini-notebook` | 第三方 [Gemini Notebook CLI／MCP](https://github.com/jacob-bd/gemini-notebook-mcp-cli) |
 | 02 | [連接 GitHub](02-連接-GitHub.md) | `antigravity-github` | Git、GitHub CLI 與登入驗證 |
-| 03 | [連接 Firebase](03-連接-Firebase.md) | `antigravity-firebase` | Firebase CLI、專案 context 與 MCP |
-| 04 | [用 AntiGravity 生圖](04-用Antigravity生圖.md) | `antigravity-draw` | 內建生圖與 OpenAI API 進階路線 |
-| 05 | [連接 Obsidian](05-連接-Obsidian.md) | `antigravity-obsidian` | Vault 與 MCPVault |
+| 03 | [連接 Obsidian](03-連接-Obsidian.md) | `antigravity-obsidian` | Vault 與 MCPVault |
+| 04 | [連接 Firebase](04-連接-Firebase.md) | `antigravity-firebase` | Firebase CLI、專案 context 與 MCP |
+| 05 | [用 AntiGravity 生圖](05-用Antigravity生圖.md) | `antigravity-draw` | 內建生圖與 OpenAI API 進階路線 |
 
 完整教學已於 2026-07-17 拆分為上表的 00–05 六份說明檔；舊的單一大文件與其相容索引均已移除。
+
+> 編號已於 2026-08-02 對齊其他三份懶人包（Claude Code／Codex／OpenCode）的
+> 01 Gemini Notebook／02 GitHub／03 Obsidian／04 Firebase／05 生圖。
+> 安裝後的 Skill 名稱（`antigravity-*`）不受影響，已安裝的使用者不必重裝。
+> 本懶人包沒有 00 環境建置（Antigravity IDE 自帶環境）。
 
 ## 安全原則
 

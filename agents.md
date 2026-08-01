@@ -27,9 +27,9 @@ antigravity-lazy-pack/
 ├─ 00-一次安裝全部.md
 ├─ 01-連接-Gemini-Notebook.md
 ├─ 02-連接-GitHub.md
-├─ 03-連接-Firebase.md
-├─ 04-用Antigravity生圖.md
-├─ 05-連接-Obsidian.md
+├─ 03-連接-Obsidian.md
+├─ 04-連接-Firebase.md
+├─ 05-用Antigravity生圖.md
 ├─ skills/                      # 可安裝的子技能
 ├─ scripts/                     # 驗證與輔助腳本
 ├─ agents.md                    # 本檔：專案藍圖

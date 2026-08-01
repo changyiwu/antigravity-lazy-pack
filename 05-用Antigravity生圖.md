@@ -1,4 +1,4 @@
-# AntiGravity 懶人包 #04：用 AntiGravity 生圖
+# AntiGravity 懶人包 #05：用 AntiGravity 生圖
 
 > 版本：v2.0
 >
@@ -36,7 +36,7 @@ $env:OPENAI_API_KEY = '你的 API Key'
 ### 執行
 
 ```powershell
-python .\skills\04-draw\scripts\draw_openai.py `
+python .\skills\05-draw\scripts\draw_openai.py `
   --prompt "English image prompt" `
   --output ".\assets\output.png" `
   --model gpt-image-2 `
