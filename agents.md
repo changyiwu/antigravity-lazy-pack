@@ -46,6 +46,18 @@ antigravity-lazy-pack/
 | L2 | GitHub | https://github.com/changyiwu/antigravity-lazy-pack （公開） | 指定時 |
 | L3 | Obsidian | `antigravity-lazy-pack/專案工作流程.md` | 有需要時 |
 
+## 三個檔案的職責（依「時效性」分家，不是依「詳細程度」）
+
+| 檔案 | 時效 | 寫入方式 | 放什麼 |
+|------|------|---------|--------|
+| `handoff.md` | **只對下一個 session 有效**，過期即丟 | 每次收工整份重寫 | 做到哪、下一步、**這次**的暫時 workaround |
+| `agents.md`（本檔） | **長期有效**，每個 session 都適用 | 只有規則本身變了才改 | 目標、路線圖、常設規則、結構 |
+| Obsidian／`git log` | **歷史**：發生過什麼、為什麼 | 只增不刪 | 決策紀錄、踩坑完整版、逐次進度 |
+
+驗收標準：**`handoff.md` 整份刪掉，不應損失任何長期資訊**——會的話代表該升級進本檔卻沒升級。
+
+**本檔不要出現的東西**：❌ `## 最近進度`／逐次工作紀錄、❌ 決策理由與踩坑完整版。2026-08-03 移除了 `## 最近進度`，內容逐條比對後已在 L3 筆記的〈🗓️ 最近更動紀錄〉——**是主動移除，不是遺漏，不要補回來**。踩過的坑只把**結論**收斂成一條祈使句寫進〈工作約定〉，原因留 L3。
+
 ## 工作約定
 
 - 任何 Agent、任何電腦：**開工先讀 `handoff.md`，收工必更新 `handoff.md`**
@@ -68,11 +80,3 @@ antigravity-lazy-pack/
 - 不要提交真實 Vault 路徑或私人筆記內容
 - 不要自動納入無關的 Git 變更
 - 不要儲存學生真名；正式資料只使用班級代號與座號
-
-## 最近進度
-
-- 2026-07-22：移除內建工作流程 Skill、將 Obsidian 懶人包重編為 #05，並把專案規則入口由 `ANTIGRAVITY.md` 遷移為本檔；發布驗證已通過。
-- 2026-07-24：專案藍圖改用標準範本格式（補上路線圖 checklist、資料夾結構與同步層級表）。
-- 2026-08-01：NotebookLM 品牌更新為 Gemini Notebook；上游 Repo 改名，保留既有 PyPI 套件與執行檔技術名稱以維持相容。
-- 2026-08-01：全域 Skill 已由 `antigravity-notebooklm` 遷移為 `antigravity-gemini-notebook`；MCP key 同步改為 `gemini-notebook`，其餘服務設定保持不變。
-- 2026-08-01：全域 Skill 已由 `antigravity-notebooklm` 遷移為 `antigravity-gemini-notebook`；MCP key 同步改為 `gemini-notebook`，其餘服務設定保持不變。
