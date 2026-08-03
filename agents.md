@@ -72,6 +72,9 @@ antigravity-lazy-pack/
 ## 專案特殊規則
 
 - Antigravity 全域 Skill 安裝到 `~/.gemini/config/skills/<skill-name>/`；Windows 對應為 `C:\Users\<使用者>\.gemini\config\skills\<skill-name>\`
+- **不要使用 `nlm setup add antigravity` 自動設定 MCP**：`notebooklm-mcp-cli 0.9.4` 會寫入 `~/.gemini/antigravity/mcp_config.json`，但 Antigravity IDE 2.0 實際讀的是 `~/.gemini/config/mcp_config.json`
+- **品牌與 Repo 已改名，但 PyPI 套件 `notebooklm-mcp-cli`、CLI `nlm` 與執行檔 `notebooklm-mcp` 仍是舊技術名稱**，不要跟著改
+- MCP 設定備份留在本機 `~/.gemini/config/`，**不會隨 Git 同步到其他電腦**，換電腦要重設
 
 ## 安全與隱私
 
