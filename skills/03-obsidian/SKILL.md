@@ -15,12 +15,27 @@ Get-Command mcpvault
 
 3. 先解析並備份 `~/.gemini/config/mcp_config.json`，只合併 `.mcpServers.obsidian`，保留其他 server；同名設定先顯示差異並確認，寫入後再解析驗證：
 
+**Windows**
+
 ```json
 {
   "mcpServers": {
     "obsidian": {
       "command": "C:\\Users\\<使用者>\\AppData\\Roaming\\npm\\mcpvault.cmd",
       "args": ["C:\\Users\\<使用者>\\Documents\\<vault>"]
+    }
+  }
+}
+```
+
+**macOS / Linux**（全域安裝後直接寫 `mcpvault`，不必填完整路徑）
+
+```json
+{
+  "mcpServers": {
+    "obsidian": {
+      "command": "mcpvault",
+      "args": ["/Users/<使用者>/Documents/<vault>"]
     }
   }
 }

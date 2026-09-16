@@ -12,10 +12,21 @@
 
 常見位置：
 
+**Windows**
+
 ```text
 C:\Users\<使用者>\OneDrive\文件\<vault>
 C:\Users\<使用者>\Documents\<vault>
 G:\我的雲端硬碟\<vault>
+```
+
+**macOS / Linux**
+
+```text
+~/Library/CloudStorage/OneDrive-Personal/文件/<vault>
+~/Library/CloudStorage/GoogleDrive-<你的信箱>/My Drive/<vault>
+~/Library/Mobile Documents/iCloud~md~obsidian/Documents/<vault>
+~/Documents/<vault>
 ```
 
 確認條件：
@@ -29,9 +40,18 @@ G:\我的雲端硬碟\<vault>
 
 全域 npm 安裝會修改使用者環境，執行前先確認：
 
+**Windows（PowerShell）**
+
 ```powershell
 npm.cmd install -g @bitbonsai/mcpvault
 Get-Command mcpvault
+```
+
+**macOS / Linux**
+
+```bash
+npm install -g @bitbonsai/mcpvault
+command -v mcpvault
 ```
 
 Windows 常見執行檔：
@@ -40,17 +60,28 @@ Windows 常見執行檔：
 C:\Users\<使用者>\AppData\Roaming\npm\mcpvault.cmd
 ```
 
+macOS / Linux 常見執行檔：
+
+```text
+/usr/local/bin/mcpvault
+~/.npm-global/bin/mcpvault
+```
+
+> macOS / Linux 的 MCP 設定直接寫 `mcpvault` 即可，不必填完整路徑。
+
 ## 步驟三：註冊 MCP
 
 在 `~/.gemini/config/mcp_config.json` 加入：
 
 修改設定時必須使用合併流程：
 
-1. 若檔案已存在，先用 `Get-Content -Raw | ConvertFrom-Json` 確認 JSON 合法。
+1. 若檔案已存在，先確認 JSON 合法：Windows 用 `Get-Content -Raw | ConvertFrom-Json`，macOS / Linux 用 `python3 -m json.tool < 檔案`。
 2. 寫入前建立帶時間戳的備份。
 3. 只新增或更新 `.mcpServers.obsidian`，保留其他 server；下方範例不可覆蓋整份既有設定。
 4. 若同名 server 已存在，先顯示差異並取得更新同意。
 5. 寫入後再次解析 JSON 驗證。
+
+**Windows**
 
 ```json
 {
@@ -58,6 +89,19 @@ C:\Users\<使用者>\AppData\Roaming\npm\mcpvault.cmd
     "obsidian": {
       "command": "C:\\Users\\<使用者>\\AppData\\Roaming\\npm\\mcpvault.cmd",
       "args": ["C:\\Users\\<使用者>\\Documents\\<vault>"]
+    }
+  }
+}
+```
+
+**macOS / Linux**
+
+```json
+{
+  "mcpServers": {
+    "obsidian": {
+      "command": "mcpvault",
+      "args": ["/Users/<使用者>/Documents/<vault>"]
     }
   }
 }
@@ -83,5 +127,5 @@ C:\Users\<使用者>\AppData\Roaming\npm\mcpvault.cmd
 ## 復原
 
 - 從 `mcp_config.json` 移除 `obsidian` server。
-- 卸載：`npm.cmd uninstall -g @bitbonsai/mcpvault`。
+- 卸載：Windows `npm.cmd uninstall -g @bitbonsai/mcpvault`，macOS / Linux `npm uninstall -g @bitbonsai/mcpvault`。
 - 移除 MCP 不會刪除 vault；任何測試筆記仍需另外確認後處理。
