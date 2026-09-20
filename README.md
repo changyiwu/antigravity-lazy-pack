@@ -8,7 +8,7 @@
 
 ## 固定規則
 
-- 專案規則的主要入口是 `agents.md`。
+- 專案規則的主要入口是 `AGENTS.md`。
 - 全域 Skill 統一安裝到 `~/.gemini/config/skills/<skill-name>/`。
 - Windows 對應為 `C:\Users\<使用者>\.gemini\config\skills\<skill-name>\`。
 
@@ -73,7 +73,7 @@
 
 ```text
 README.md                 使用者入口與索引
-agents.md                 跨 Agent 專案主要規則入口
+AGENTS.md                 跨 Agent 專案主要規則入口
 SKILL.md                  AI 安裝派送入口
 編號說明檔                一份安裝入口與五份功能教學
 skills/*/SKILL.md         五個精簡可執行 Skill

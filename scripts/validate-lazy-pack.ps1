@@ -208,12 +208,12 @@ foreach ($File in $TextFiles) {
     }
 }
 
-$Rules = Get-Content -Raw -Encoding UTF8 -LiteralPath (Join-Path $Root 'agents.md')
+$Rules = Get-Content -Raw -Encoding UTF8 -LiteralPath (Join-Path $Root 'AGENTS.md')
 if ($Rules -notmatch [regex]::Escape('跨 Agent 通用的專案藍圖')) {
-    Add-Failure 'agents.md 未宣告跨 Agent 通用的專案藍圖入口'
+    Add-Failure 'AGENTS.md 未宣告跨 Agent 通用的專案藍圖入口'
 }
 if ($Rules -notmatch [regex]::Escape($RequiredSkillPath)) {
-    Add-Failure "agents.md 未使用標準全域 Skill 路徑：$RequiredSkillPath"
+    Add-Failure "AGENTS.md 未使用標準全域 Skill 路徑：$RequiredSkillPath"
 }
 
 $Readme = Get-Content -Raw -Encoding UTF8 -LiteralPath (Join-Path $Root 'README.md')

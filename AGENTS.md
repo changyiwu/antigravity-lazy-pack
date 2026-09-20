@@ -13,7 +13,7 @@ Antigravity IDE 2.0 專屬的服務連接與生圖懶人包。與 `claude-code-l
 ## 目標與路線圖
 
 - [x] 階段一：五個功能 Skill 成形（一次安裝全部、Gemini Notebook、GitHub、Firebase、生圖、Obsidian）
-- [x] 階段二：移除內建工作流程 Skill，Obsidian 重編為 #05，規則入口由 `ANTIGRAVITY.md` 遷移為 `agents.md`
+- [x] 階段二：移除內建工作流程 Skill，Obsidian 重編為 #05，規則入口由 `ANTIGRAVITY.md` 遷移為 `AGENTS.md`
 - [x] 階段三：發布驗證通過，文件／manifest／安裝器／Skill 編號全數同步
 - [ ] 階段四：重跑全域 Skill 安裝，確認五個 Antigravity Skills 均為最新版
 - [ ] 階段五：新增懶人包時維持文件、manifest、安裝器與驗證器同步
@@ -32,7 +32,7 @@ antigravity-lazy-pack/
 ├─ 05-用Antigravity生圖.md
 ├─ skills/                      # 可安裝的子技能
 ├─ scripts/                     # 驗證與輔助腳本
-├─ agents.md                    # 本檔：專案藍圖
+├─ AGENTS.md                    # 本檔：專案藍圖
 ├─ handoff.md                   # 交接檔（每次收工必更新）
 ├─ .agents/  .github/  .gitattributes  .gitignore
 └─ LICENSE
@@ -42,7 +42,7 @@ antigravity-lazy-pack/
 
 | 層級 | 平台 | 位置 | 讀取時機 |
 |------|------|------|---------|
-| L1 | 本地（GDrive） | `agents.md`＋`handoff.md` | 每個 session |
+| L1 | 本地（GDrive） | `AGENTS.md`＋`handoff.md` | 每個 session |
 | L2 | GitHub | https://github.com/changyiwu/antigravity-lazy-pack （公開） | 指定時 |
 | L3 | Obsidian | `antigravity-lazy-pack/專案工作流程.md` | 有需要時 |
 
@@ -51,7 +51,7 @@ antigravity-lazy-pack/
 | 檔案 | 時效 | 寫入方式 | 放什麼 |
 |------|------|---------|--------|
 | `handoff.md` | **只對下一個 session 有效**，過期即丟 | 每次收工整份重寫 | 做到哪、下一步、**這次**的暫時 workaround |
-| `agents.md`（本檔） | **長期有效**，每個 session 都適用 | 只有規則本身變了才改 | 目標、路線圖、常設規則、結構 |
+| `AGENTS.md`（本檔） | **長期有效**，每個 session 都適用 | 只有規則本身變了才改 | 目標、路線圖、常設規則、結構 |
 | Obsidian／`git log` | **歷史**：發生過什麼、為什麼 | 只增不刪 | 決策紀錄、踩坑完整版、逐次進度 |
 
 驗收標準：**`handoff.md` 整份刪掉，不應損失任何長期資訊**——會的話代表該升級進本檔卻沒升級。
